@@ -6,9 +6,9 @@ function App() {
 
    return (
     <div>
-      <h1>Inventario de Productos</h1>
+      <h1 className='text-3xl'>Inventario de Productos</h1>
       <Crud/>
-      <h1>Inventario de Ingresos</h1>
+      <h1 className='font-bold'>Inventario de Ingresos</h1>
       <CrudIngresos/>
     </div>
   );
