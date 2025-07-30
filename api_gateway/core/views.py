@@ -2,10 +2,6 @@ import json
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-
-INVENTARIO_URL = "http://localhost:8001/api/inventario/"
-INGRESOS_URL = "http://localhost:8002/api/ingresos/"
-
 import json
 import requests
 from django.views.decorators.csrf import csrf_exempt
@@ -22,7 +18,7 @@ def forward_request(request, base_url, pk=None):
 
     try:
         if request.method == "GET":
-            resp = requests.get(url)
+            resp = requests.get(url,params=request.GET, headers=headers)#se agrea params=request.GET para manejar la paginación
         elif request.method == "POST":
             data = json.loads(request.body.decode("utf-8"))
             resp = requests.post(url, json=data, headers=headers)
@@ -49,7 +45,7 @@ def forward_request(request, base_url, pk=None):
         return HttpResponse(f"Error en API Gateway: {e}", status=500)
 
 # Proxies específicos para inventario e ingresos
-@csrf_exempt
+@csrf_exempt 
 def proxy_inventario(request, pk=None):
     return forward_request(request, INVENTARIO_URL, pk)
 

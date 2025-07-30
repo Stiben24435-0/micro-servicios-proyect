@@ -1,13 +1,15 @@
-from rest_framework import generics
+from rest_framework import generics,filters
 from .models import Productos
 from .serializer import ProductoSerializer
 from rest_framework.permissions import AllowAny
 
 
 class ProductoListCreateview(generics.ListCreateAPIView):
-    queryset = Productos.objects.all()
+    queryset = Productos.objects.all().order_by('-id')
     serializer_class = ProductoSerializer
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['nombre','cantidad','precio']  # campos donde buscar
 
 
 
