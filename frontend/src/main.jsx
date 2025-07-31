@@ -7,11 +7,14 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className='  bg-slate-400 min-h-screen text-white'>    
+   
+
+
 
     {/* <Navbar /> */}
 
     <App />
-    </div>
+
+    
   </StrictMode>
 )

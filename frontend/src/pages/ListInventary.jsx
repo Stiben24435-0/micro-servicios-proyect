@@ -8,7 +8,7 @@ function ListInventary() {
 
     const API_URL = "http://127.0.0.1:8000/api/inventario/";
 
-    const { productos,setProductos,page,totalPages,fetchProductos } = usePaginationInventary();
+    const { productos,page,totalPages,fetchProductos } = usePaginationInventary();
 
     
 

@@ -1,9 +1,13 @@
 import "./App.css";
-import CrudInventory from "./components/CrudInventory.jsx";
+import CrudInventory from "./componentsApp/CrudInventory.jsx";
 import Crud from "./Crud.jsx";
 import CrudIngresos from "./CrudIngresos.jsx";
 import Layout from "./pages/Layout.jsx";
 import { createBrowserRouter, Form, RouterProvider } from "react-router-dom";
+
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -37,8 +41,8 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
- 
-  return <RouterProvider router={router} />;
+
+  return    <RouterProvider router={router} /> ;
 }
 
 export default App;

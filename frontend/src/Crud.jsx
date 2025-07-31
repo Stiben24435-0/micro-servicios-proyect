@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import usePaginationInventary from "./components/usePaginationInventary";
+import usePaginationInventary from "./componentsApp/usePaginationInventary";
 
 const API_URL = "http://127.0.0.1:8000/api/inventario/";
 
