@@ -19,9 +19,6 @@ export default function UsePaginationInventary() {
 
       // devuelve count (total) y results (los productos de esa página)
       setProductos(res.data.results || [] );
-      console.log(res.data);
-      // console.log(res);
-
       setTotalPages(Math.ceil(res.data.count/ limit)); // Calcular páginas totales
       setPage(page);
     } catch (error) {

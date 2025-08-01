@@ -73,9 +73,7 @@ function CrudInventory() {
     fetchProductos(page, search); //refresca la lista despues de guardar
   };
 
-  // Filtrar los items según la búsqueda
-  // items || [] esto lo usamos para evitar errores si items es undefined
-  // y asegurarnos de que siempre sea un array
+
 
   return (
     <div className=" w-6xl rounded-lg xs:m-4">
@@ -116,32 +114,40 @@ function CrudInventory() {
 
           {/* Cuerpo de la tabla */}
           <tbody>
-            {productos.map((item) => (
-              <tr key={item.id}>
-                <td>{item.nombre}</td>
-                <td>{item.cantidad}</td>
-                <td>${item.precio}</td>
-                <td className="flex gap-2">
-                  {/* botones de acciones */}
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {productos.length === 0 ? (
+    <tr>
+      <td colSpan="4" className="text-center py-4 text-gray-500">
+        No hay productos.
+      </td>
+    </tr>
+  ) : (
+    productos.map((item) => (
+      <tr key={item.id}>
+        <td>{item.nombre}</td>
+        <td>{item.cantidad}</td>
+        <td>${item.precio}</td>
+        <td className="flex gap-2">
+          <button
+            onClick={() => handleEdit(item)}
+            className="bg-blue-500 text-white px-2 py-1 rounded"
+          >
+            Editar
+          </button>
+          <button
+            onClick={() => handleDelete(item.id)}
+            className="bg-red-500 text-white px-2 py-1 rounded"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
         </table>
+        {productos.length >0  && (
 
-        <div>
+          <div>
           {/* control de paginacion */}
 
           <div className="  join flex gap-4 justify-center mt-10 mx-auto  rounded-xl mb-20">
@@ -149,7 +155,7 @@ function CrudInventory() {
               disabled={page === 1}
               onClick={() => fetchProductos(page - 1, search)}
               className=" join-item btn  px-4 py-2disabled:opacity-50 cursor-pointer"
-            >
+              >
               Anterior
             </button>
             <span className="join-item btn hover:cursor-auto">
@@ -159,11 +165,12 @@ function CrudInventory() {
               disabled={page === totalPages}
               onClick={() => fetchProductos(page + 1, search)}
               className=" join-item btn px-4 py-2  cursor-pointer disabled:opacity-50  disable:cursor-crosshair"
-            >
+              >
               Siguiente
             </button>
           </div>
         </div>
+            )}
       </div>
 
       {/* Modal */}
