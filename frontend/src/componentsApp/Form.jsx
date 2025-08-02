@@ -18,8 +18,6 @@ function ItemForm({ initialData, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-    
-      
       <div>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Inventario</legend>
@@ -57,14 +55,12 @@ function ItemForm({ initialData, onSubmit }) {
           />
         </fieldset>
 
-      <button
-        type="submit"
-        className="btn btn-soft btn-success  px-4 py-2 rounded flex justify-center items-center w-80 mt-4"
-      >
-        Guardar
-      </button>
-      
-      
+        <button
+          type="submit"
+          className="btn btn-soft btn-success  px-4 py-2 rounded flex justify-center items-center w-80 mt-4"
+        >
+          Guardar
+        </button>
       </div>
     </form>
   );

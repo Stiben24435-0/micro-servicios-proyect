@@ -20,7 +20,6 @@ function CrudInventory() {
     search,
     setSearch,
     loading,
-   
   } = usePaginationInventary(API_URL);
   // hook para manejar la paginación
 
@@ -48,7 +47,6 @@ function CrudInventory() {
   const handleEdit = (item) => {
     setEditingItem(item);
     setShowModal(true);
-    
   };
 
   const handleAdd = () => {
@@ -58,35 +56,29 @@ function CrudInventory() {
   };
 
   const handleSave = async (data) => {
-    
     if (editingItem) {
       await updateItemInventory(editingItem.id, data);
-        showToast("Producto actualizado correctamente", "success");
+      showToast("Producto actualizado correctamente", "success");
     } else {
       await createItemInventory(data);
-       showToast("Producto creado correctamente", "success");
+      showToast("Producto creado correctamente", "success");
     }
     setShowModal(false);
     setEditingItem(null);
     fetchProductos(page, search); //refresca la lista despues de guardar
   };
 
-
-
   return (
     <div className=" w-6xl rounded-lg xs:m-4">
       <h1 className="text-2xl font-bold mb-4 text-center ">Inventario</h1>
 
       <div className="  flex gap-2 mb-4 ">
-        
         <input
           type="text"
           placeholder="Buscar..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="input input-bordered  w-full"
-          
-          
         />
         <button
           onClick={handleAdd}
@@ -98,54 +90,51 @@ function CrudInventory() {
 
       {/* tabla con productos */}
 
-  {productos.length === 0 ? (
-    <p className="text-center text-gray-500">No hay productos.</p>
-  ):(
-      <div className="  mb-12 overflow-x-auto border-2 border-slate-700 rounded-lg">
-        <table className="table ">
-          {/* Encabezado */}
-          <thead>
-            <tr className="text-cyan-100">
-              <th>Nombre</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
+      {productos.length === 0 ? (
+        <p className="text-center text-gray-500">No hay productos.</p>
+      ) : (
+        <div className="  mb-12 overflow-x-auto border-2 border-slate-700 rounded-lg">
+          <table className="table ">
+            {/* Encabezado */}
+            <thead>
+              <tr className="text-cyan-100">
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
 
-          {/* Cuerpo de la tabla */}
-          <tbody>
-    
+            {/* Cuerpo de la tabla */}
+            <tbody>
+              {productos.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.nombre}</td>
+                  <td>{item.cantidad}</td>
+                  <td>${item.precio}</td>
+                  <td className="flex gap-5">
+                    <button
+                      onClick={() => handleEdit(item)}
+                      className="btn btn-soft btn-info px-2 py-1 rounded"
+                    >
+                      Editar
+                    </button>
 
-  {productos.map((item) => (
-      <tr key={item.id}>
-        <td>{item.nombre}</td>
-        <td>{item.cantidad}</td>
-        <td>${item.precio}</td>
-        <td className="flex gap-5">
-          <button
-            onClick={() => handleEdit(item)}
-            className="btn btn-soft btn-info px-2 py-1 rounded"
-          >
-            Editar
-          </button>
-
-          <button
-            onClick={() => handleDelete(item.id)}
-            className=" btn btn-soft btn-secondary px-2 py-1 rounded"
-          >
-            Eliminar
-          </button>
-        </td>
-      </tr>
-    ))}
-      </tbody>
-    </table>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className=" btn btn-soft btn-secondary px-2 py-1 rounded"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-    )}
-        {productos.length >0  && (
-
-          <div>
+      )}
+      {productos.length > 0 && (
+        <div>
           {/* control de paginacion */}
 
           <div className="  join flex gap-4 justify-center mt-10 mx-auto  rounded-xl mb-20">
@@ -153,7 +142,7 @@ function CrudInventory() {
               disabled={page === 1}
               onClick={() => fetchProductos(page - 1, search)}
               className=" join-item btn  px-4 py-2disabled:opacity-50 cursor-pointer"
-              >
+            >
               Anterior
             </button>
             <span className="join-item btn hover:cursor-auto">
@@ -163,13 +152,12 @@ function CrudInventory() {
               disabled={page === totalPages}
               onClick={() => fetchProductos(page + 1, search)}
               className=" join-item btn px-4 py-2  cursor-pointer disabled:opacity-50  disable:cursor-crosshair"
-              >
+            >
               Siguiente
             </button>
           </div>
         </div>
-     
-            )}
+      )}
 
       {/* Modal */}
       {showModal && (
