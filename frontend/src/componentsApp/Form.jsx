@@ -59,7 +59,7 @@ function ItemForm({ initialData, onSubmit }) {
 
       <button
         type="submit"
-        className="bg-green-600 text-white px-4 py-2 rounded flex justify-center items-center w-80 mt-4"
+        className="btn btn-soft btn-success  px-4 py-2 rounded flex justify-center items-center w-80 mt-4"
       >
         Guardar
       </button>

@@ -75,7 +75,7 @@ function CrudInventory() {
 
   return (
     <div className=" w-6xl rounded-lg xs:m-4">
-      <h1 className="text-xl font-bold mb-4 text-center ">Inventario</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center ">Inventario</h1>
 
       <div className="  flex gap-2 mb-4 ">
         
@@ -90,7 +90,7 @@ function CrudInventory() {
         />
         <button
           onClick={handleAdd}
-          className="btn btn-success px-4 py-2 rounded"
+          className="btn btn-soft btn-success  px-4 py-2 rounded"
         >
           Agregar
         </button>
@@ -98,6 +98,9 @@ function CrudInventory() {
 
       {/* tabla con productos */}
 
+  {productos.length === 0 ? (
+    <p className="text-center text-gray-500">No hay productos.</p>
+  ):(
       <div className="  mb-12 overflow-x-auto border-2 border-slate-700 rounded-lg">
         <table className="table ">
           {/* Encabezado */}
@@ -112,38 +115,34 @@ function CrudInventory() {
 
           {/* Cuerpo de la tabla */}
           <tbody>
-  {productos.length === 0 ? (
-    <tr>
-      <td colSpan="4" className="text-center py-4 text-gray-500">
-        No hay productos.
-      </td>
-    </tr>
-  ) : (
-    productos.map((item) => (
+    
+
+  {productos.map((item) => (
       <tr key={item.id}>
         <td>{item.nombre}</td>
         <td>{item.cantidad}</td>
         <td>${item.precio}</td>
-        <td className="flex gap-2">
+        <td className="flex gap-5">
           <button
             onClick={() => handleEdit(item)}
-            className="bg-blue-500 text-white px-2 py-1 rounded"
+            className="btn btn-soft btn-info px-2 py-1 rounded"
           >
             Editar
           </button>
+
           <button
             onClick={() => handleDelete(item.id)}
-            className="bg-red-500 text-white px-2 py-1 rounded"
+            className=" btn btn-soft btn-secondary px-2 py-1 rounded"
           >
             Eliminar
           </button>
         </td>
       </tr>
-    ))
-  )}
-</tbody>
-        </table>
+    ))}
+      </tbody>
+    </table>
         </div>
+    )}
         {productos.length >0  && (
 
           <div>
@@ -188,7 +187,7 @@ function CrudInventory() {
             />
             <button
               onClick={() => setShowModal(false)}
-              className="mt-4 bg-gray-400 text-white px-4 py-2 rounded "
+              className="mt-4  btn btn-soft btn-default text-white px-4 py-2 rounded "
             >
               Cancelar
             </button>

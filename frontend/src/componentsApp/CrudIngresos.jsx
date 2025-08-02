@@ -80,7 +80,7 @@ if (loading) {
 
   return (
     <div className="w-6xl rounded-lg xs:m-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Gestión de Ingresos</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center"> Ingresos</h2>
 
       <div className="flex gap-2 mb-4">
 
@@ -88,14 +88,14 @@ if (loading) {
           type="text"
           placeholder="Buscar..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)(loading(false))}
+          onChange={(e) => setSearch(e.target.value)}
           className="input input-bordered  w-full"
           
           
         />
         <button
           onClick={handleAdd}
-          className="btn btn-success px-4 py-2 rounded"
+          className="btn btn-soft btn-success px-4 py-2 rounded"
         >
           Agregar 
         </button>
@@ -122,19 +122,22 @@ if (loading) {
                 <td >{i.fecha}</td>
                 <td >{i.descripcion}</td>
                 <td >${i.monto}</td>
-                <td className="flex gap-2">
+                <td className="flex gap-5">
+
                   <button
                     onClick={() => handleEdit(i)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded"
+                    className=" btn btn-soft btn-info  px-2 py-1 rounded"
                     >
                     Editar
                   </button>
                   <button
                     onClick={() => handleDelete(i.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="btn btn-soft btn-secondary px-2 py-1 rounded"
                     >
                     Eliminar
                   </button>
+                      
+
                 </td>
               </tr>
             ))}
@@ -178,7 +181,8 @@ if (loading) {
             <h2 className="text-center text-lg font-bold mb-4">
               {editingItem ? "Editar Ingreso" : "Agregar Ingreso"}
             </h2>
-      <FormIngresos
+
+            <FormIngresos
               initialData={
                 editingItem || { fecha: "", descripcion: "", monto: "" }
               }
@@ -186,7 +190,7 @@ if (loading) {
             />
             <button
               onClick={() => setShowModal(false)}
-              className="mt-4 bg-gray-400 text-white px-4 py-2 rounded "
+              className="mt-4 btn btn-soft btn-default text-white px-4 py-2 rounded "
             >
               Cancelar
             </button>
