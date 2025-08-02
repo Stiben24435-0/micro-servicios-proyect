@@ -1,31 +1,35 @@
-import { useState } from "react";
 import usePaginationInventary from "../componentsApp/usePaginationInventary.jsx";
-import Loader from "../componentsApp/Loader.jsx";
-import Toast from "../componentsApp/Toast.jsx";
-import Form from "../componentsApp/Form.jsx";
+import { useState } from "react";
+import Loader from "./Loader.jsx";
+import Toast from "./Toast.jsx";
+import FormIngresos from "../componentsApp/FormIngresos.jsx"
+
 
 import {
-  deleteItemInventory,
-  updateItemInventory,
-  createItemInventory,
+  deleteItemRevenue,
+  updateItemRevenue,
+  createItemRevenue,
 } from "../services/ServicesApi";
 
-const API_URL = "http://127.0.0.1:8000/api/inventario/";
-function CrudInventory() {
-  const {
-    productos,
-    page,
-    totalPages,
-    fetchProductos,
-    search,
-    setSearch,
-    loading,
-   
-  } = usePaginationInventary(API_URL);
-  // hook para manejar la paginación
+const API_URL = "http://127.0.0.1:8000/api/ingresos/";
 
-  const [editingItem, setEditingItem] = useState(null);
+export default function IngresosCrud() {
+
+  const {
+      productos,
+      page,
+      totalPages,
+      fetchProductos,
+      search,
+      setSearch,
+      loading,
+     
+    } = usePaginationInventary(API_URL);
+
+
+ 
   const [showModal, setShowModal] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
   const [toast, setToast] = useState({
     mensaje: "",
     tipo: "success",
@@ -36,11 +40,12 @@ function CrudInventory() {
     setToast({ mensaje, tipo, visible: true });
   };
 
-  if (loading) {
+
+if (loading) {
     return <Loader />;
   }
   const handleDelete = async (id) => {
-    await deleteItemInventory(id);
+    await deleteItemRevenue(id);
     fetchProductos(page); //recarga la pagina actual despues de eliminar
     showToast("Elemento eliminado", "danger");
   };
@@ -60,11 +65,11 @@ function CrudInventory() {
   const handleSave = async (data) => {
     
     if (editingItem) {
-      await updateItemInventory(editingItem.id, data);
-        showToast("Producto actualizado correctamente", "success");
+      await updateItemRevenue(editingItem.id, data);
+        showToast("Elemento actualizado correctamente", "success");
     } else {
-      await createItemInventory(data);
-       showToast("Producto creado correctamente", "success");
+      await createItemRevenue(data);
+       showToast("Elemento creado correctamente", "success");
     }
     setShowModal(false);
     setEditingItem(null);
@@ -74,16 +79,16 @@ function CrudInventory() {
 
 
   return (
-    <div className=" w-6xl rounded-lg xs:m-4">
-      <h1 className="text-xl font-bold mb-4 text-center ">Inventario</h1>
+    <div className="w-6xl rounded-lg xs:m-4">
+      <h2 className="text-2xl font-bold mb-4 text-center">Gestión de Ingresos</h2>
 
-      <div className="  flex gap-2 mb-4 ">
-        
-        <input
+      <div className="flex gap-2 mb-4">
+
+         <input
           type="text"
           placeholder="Buscar..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)(loading(false))}
           className="input input-bordered  w-full"
           
           
@@ -92,61 +97,55 @@ function CrudInventory() {
           onClick={handleAdd}
           className="btn btn-success px-4 py-2 rounded"
         >
-          Agregar
+          Agregar 
         </button>
       </div>
 
-      {/* tabla con productos */}
+      {productos.length === 0 ? (
+        <p className="text-center text-gray-500">No hay ingresos.</p>
+      ) : (
 
-      <div className="  mb-12 overflow-x-auto border-2 border-slate-700 rounded-lg">
-        <table className="table ">
-          {/* Encabezado */}
+        <div className="  mb-12 overflow-x-auto border-2 border-slate-700 rounded-lg">
+
+        <table className="table">
           <thead>
             <tr className="text-cyan-100">
-              <th>Nombre</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Acciones</th>
+              <th >Fecha</th>
+              <th >Descripción</th>
+              <th >Monto</th>
+              <th >Acciones</th>
             </tr>
           </thead>
-
-          {/* Cuerpo de la tabla */}
           <tbody>
-  {productos.length === 0 ? (
-    <tr>
-      <td colSpan="4" className="text-center py-4 text-gray-500">
-        No hay productos.
-      </td>
-    </tr>
-  ) : (
-    productos.map((item) => (
-      <tr key={item.id}>
-        <td>{item.nombre}</td>
-        <td>{item.cantidad}</td>
-        <td>${item.precio}</td>
-        <td className="flex gap-2">
-          <button
-            onClick={() => handleEdit(item)}
-            className="bg-blue-500 text-white px-2 py-1 rounded"
-          >
-            Editar
-          </button>
-          <button
-            onClick={() => handleDelete(item.id)}
-            className="bg-red-500 text-white px-2 py-1 rounded"
-          >
-            Eliminar
-          </button>
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+            {productos.map((i) => (
+              <tr key={i.id}>
+                <td >{i.fecha}</td>
+                <td >{i.descripcion}</td>
+                <td >${i.monto}</td>
+                <td className="flex gap-2">
+                  <button
+                    onClick={() => handleEdit(i)}
+                    className="bg-blue-500 text-white px-2 py-1 rounded"
+                    >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(i.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-        </div>
-        {productos.length >0  && (
+            </div>
+      )}
 
-          <div>
+       {productos.length >0  && (
+      <div>
+
           {/* control de paginacion */}
 
           <div className="  join flex gap-4 justify-center mt-10 mx-auto  rounded-xl mb-20">
@@ -169,20 +168,19 @@ function CrudInventory() {
             </button>
           </div>
         </div>
-     
             )}
-
-      {/* Modal */}
+            
+    
+        
       {showModal && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center">
-          <div className="bg-white/1 backdrop-blur-md rounded-xl p-4 border border-white/20">
-            <h2 className=" text-center text-lg font-bold mb-4">
-              {editingItem ? "Editar Producto" : "Agregar Producto"}
+          <div className="bg-white/1 backdrop-blur-md rounded-xl p-4 border  border-white/20">
+            <h2 className="text-center text-lg font-bold mb-4">
+              {editingItem ? "Editar Ingreso" : "Agregar Ingreso"}
             </h2>
-
-            <Form
+      <FormIngresos
               initialData={
-                editingItem || { nombre: "", cantidad: "", precio: "" }
+                editingItem || { fecha: "", descripcion: "", monto: "" }
               }
               onSubmit={handleSave}
             />
@@ -195,6 +193,7 @@ function CrudInventory() {
           </div>
         </div>
       )}
+
       {toast.visible && (
         <Toast
           mensaje={toast.mensaje}
@@ -205,5 +204,3 @@ function CrudInventory() {
     </div>
   );
 }
-
-export default CrudInventory;

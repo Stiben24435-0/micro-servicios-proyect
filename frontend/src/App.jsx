@@ -1,7 +1,7 @@
 import "./App.css";
 import CrudInventory from "./componentsApp/CrudInventory.jsx";
 import Crud from "./Crud.jsx";
-import CrudIngresos from "./CrudIngresos.jsx";
+import CrudIngresos from "./componentsApp/CrudIngresos.jsx";
 import Layout from "./pages/Layout.jsx";
 import { createBrowserRouter, Form, RouterProvider } from "react-router-dom";
 

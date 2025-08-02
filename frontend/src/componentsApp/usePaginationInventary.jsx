@@ -32,10 +32,13 @@ export default function UsePaginationInventary(API_URL) {
     }
   };
 
-  useEffect(() => {
-    fetchProductos(1,search);
-  }, [search,API_URL]);
+useEffect(() => {
+  const delayDebounce = setTimeout(() => {
+    fetchProductos(1, search);
+  }, 700); // espera 500ms después de escribir
 
+  return () => clearTimeout(delayDebounce);
+}, [search]);
   
 
 
