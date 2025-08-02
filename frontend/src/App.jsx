@@ -18,10 +18,10 @@ const router = createBrowserRouter([
         index: true,
         element: <div>Iniciando ando</div>,
       },
-      {
-        path: "inventario",
-        element: <Crud />,
-      },
+      // {
+      //   path: "inventario",
+      //   element: <Crud />,
+      // },
       {
         path: "ingresos",
         element: <CrudIngresos />,
@@ -32,10 +32,10 @@ const router = createBrowserRouter([
         element: <CrudInventory />,
       },
 
-      {
-        path: "formulario",
-        element: <Form />,
-      },
+      // {
+      //   path: "formulario",
+      //   element: <Form />,
+      // },
       
     ],
   },

@@ -2,18 +2,16 @@ import { useState } from "react";
 import usePaginationInventary from "../componentsApp/usePaginationInventary.jsx";
 import Loader from "../componentsApp/Loader.jsx";
 import Toast from "../componentsApp/Toast.jsx";
+import Form from "../componentsApp/Form.jsx";
 
 import {
-  // getInventory,
   deleteItemInventory,
   updateItemInventory,
   createItemInventory,
 } from "../services/ServicesApi";
 
-import Form from "../componentsApp/Form.jsx";
-
+const API_URL = "http://127.0.0.1:8000/api/inventario/";
 function CrudInventory() {
-  // hook para manejar la paginación
   const {
     productos,
     page,
@@ -23,7 +21,8 @@ function CrudInventory() {
     setSearch,
     loading,
    
-  } = usePaginationInventary();
+  } = usePaginationInventary(API_URL);
+  // hook para manejar la paginación
 
   const [editingItem, setEditingItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -42,7 +41,6 @@ function CrudInventory() {
   }
   const handleDelete = async (id) => {
     await deleteItemInventory(id);
-    console.log("elemento eliminado");
     fetchProductos(page); //recarga la pagina actual despues de eliminar
     showToast("Elemento eliminado", "danger");
   };

@@ -6,43 +6,44 @@ const INGRESOS_URL = "http://localhost:8000/api/ingresos";
 //////////////////////////// RUTAS INVENTARIO ////////////////////////////
 
 // Obtener inventario con búsqueda y paginación
-export const searchInventory = async (page = 1, search = "", pageSize = 10) => {
-  try {
-    const res = await axios.get(`${INVENTARIO_URL}/`, {
-      params: { page, search, page_size: pageSize }, // Django REST soporta estos parámetros
-    });
-    return res.data; // Devuelve {count, next, previous, results}
-  } catch (error) {
-    console.error("Error buscando inventario:", error);
-    return { count: 0, results: [] };
-  }
-};
+// export const searchInventory = async (page = 1, search = "", pageSize = 10) => {
+//   try {
+//     const res = await axios.get(`${INVENTARIO_URL}/`, {
+//       params: { page, search, page_size: pageSize }, // Django REST soporta estos parámetros
+//     });
+//     console.log(res.dat)
+//     return res.data; // Devuelve {count, next, previous, results}
+//   } catch (error) {
+//     console.error("Error buscando inventario:", error);
+//     return { count: 0, results: [] };
+//   }
+// };
 
 
 
 
 
 // Obtener todos los elementos del inventario
-export const getInventory = async () => {
-  try {
-    const res = await axios.get(`${INVENTARIO_URL}/`);
-    return res.data;
-  } catch (error) {
-    console.error("Error cargando inventario:", error);
-    return [];
-  }
-};
+// export const getInventory = async () => {
+//   try {
+//     const res = await axios.get(`${INVENTARIO_URL}/`);
+//     return res.data;
+//   } catch (error) {
+//     console.error("Error cargando inventario:", error);
+//     return [];
+//   }
+// };
 
 // Obtener un elemento por ID
-export const getItemInventory = async (id) => {
-  try {
-    const res = await axios.get(`${INVENTARIO_URL}/${id}/`);
-    return res.data;
-  } catch (error) {
-    console.error(`Error cargando inventario con ID ${id}:`, error);
-    return null;
-  }
-};
+// export const getItemInventory = async (id) => {
+//   try {
+//     const res = await axios.get(`${INVENTARIO_URL}/${id}/`);
+//     return res.data;
+//   } catch (error) {
+//     console.error(`Error cargando inventario con ID ${id}:`, error);
+//     return null;
+//   }
+// };
 
 // Crear nuevo elemento
 export const createItemInventory = async (data) => {
@@ -78,6 +79,14 @@ export const deleteItemInventory = async (id) => {
 };
 
 //////////////////////////// RUTAS INGRESOS ////////////////////////////
+
+
+
+
+
+
+
+
 
 export const getRevenue = async () => {
   try {
