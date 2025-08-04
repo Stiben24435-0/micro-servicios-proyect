@@ -1,13 +1,9 @@
-import "./App.css";
+import { createBrowserRouter, Form, RouterProvider } from "react-router-dom";
 import CrudInventory from "./componentsApp/CrudInventory.jsx";
-import Crud from "./Crud.jsx";
 import CrudIngresos from "./componentsApp/CrudIngresos.jsx";
 import Layout from "./pages/Layout.jsx";
-import { createBrowserRouter, Form, RouterProvider } from "react-router-dom";
-
-
-
-
+import { Hero } from "./pages/Hero"
+import "./App.css";
 
 const router = createBrowserRouter([
   {
@@ -16,33 +12,27 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Iniciando ando</div>,
+        element: <Hero/>,
       },
-      // {
-      //   path: "inventario",
-      //   element: <Crud />,
-      // },
+
       {
         path: "ingresos",
         element: <CrudIngresos />,
       },
       // otras rutass
       {
-        path: "lista",
+        path: "inventario",
         element: <CrudInventory />,
       },
 
-      // {
-      //   path: "formulario",
-      //   element: <Form />,
-      // },
+  
       
     ],
   },
 ]);
 function App() {
 
-  return    <RouterProvider router={router} /> ;
+  return <RouterProvider router={router} /> ;
 }
 
 export default App;

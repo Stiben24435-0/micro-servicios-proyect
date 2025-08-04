@@ -24,7 +24,7 @@ function FormIngresos({ initialData, onSubmit }) {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Inventario</legend>
 
-          <label className="label">Nombre</label>
+          <label className="label">Fecha</label>
           <input
             name="fecha"
             type="date"
@@ -35,21 +35,21 @@ function FormIngresos({ initialData, onSubmit }) {
             required
           />
 
-          <label className="label">Cantidad</label>
+          <label className="label">Descripcion</label>
           <input
             name="descripcion"
             type="text"
-            value={form.cantidad}
+            value={form.descripcion}
             onChange={handleChange}
             placeholder="Descripcion"
             className="border p-2 rounded"
             required
           />
-          <label className="label">Precio</label>
+          <label className="label">Monto</label>
           <input
             name="monto"
             type="number"
-            value={form.precio}
+            value={form.monto}
             onChange={handleChange}
             placeholder="Monto"
             className="border p-2 rounded"
